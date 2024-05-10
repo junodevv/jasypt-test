@@ -8,4 +8,4 @@ resources:
 configMapGenerator:
   - name: init-db
     files:
-      - configs/test_init.sql
+      - configs/jasypt_init.sql

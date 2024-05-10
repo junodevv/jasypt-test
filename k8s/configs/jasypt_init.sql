@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `testDB` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `testDB`;
 -- MySQL dump 10.13  Distrib 8.0.36, for macos14 (arm64)
 --
 -- Host: 127.0.0.1    Database: testDB
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-09 20:42:56
+-- Dump completed on 2024-05-10 17:51:16
