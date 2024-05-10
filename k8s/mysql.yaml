@@ -25,7 +25,7 @@ spec:
                   name: krampoline-secret
                   key: passwordKey # secret에서 설정한 key
             - name: MYSQL_DATABASE
-              value: ptmanDB # DB명
+              value: testDB # DB명
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: data
