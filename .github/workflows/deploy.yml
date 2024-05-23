@@ -1,0 +1,25 @@
+name: Build and Deploy Spring Boot to AWS EC2
+
+on:
+  push:
+    branches: [ main ] # main 브랜치에 push될때 작동
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 # 저장소로 부터 코드를 내려받는 액션
+      
+      - name: Setup java JDK 17
+        uses: actions/java@v4.2.1 # 자바 17 세팅
+        with:
+          java-version: 17
+
+      - name: Grant execute permission for gradlew 
+        run: chmod +x ./gradlew # gradlew 명령어 권한 부여
+        shell: bash
+
+      - name: Build with Gradle
+        run: ./gradlew clean build -Pjasypt.encryptor.password=jasypttest # 내려 받은 코드 빌드, passwordKey는 나중에 암호화
+      
