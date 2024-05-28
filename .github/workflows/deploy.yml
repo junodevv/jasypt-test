@@ -28,10 +28,11 @@ jobs:
         shell: bash
 
       - name: Build with Gradle     # 내려 받은 코드 빌드
-        run: ./gradlew clean build \
-              -Pjasypt.encryptor.password=${{ secrets.JASYPT_PASSWORD_KEY }} \
-              -PdatabaseUrl=${{ secrets.DATABASE_URL }} \
-              -PddlAutoValue=${{ vars.DDL_AUTO_VALUE }}
+        run: ./gradlew clean build
+        env:
+          JASYPT_PASSWORD_KEY: ${{ secrets.JASYPT_PASSWORD_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DDL_AUTO_VALUE: ${{ vars.DDL_AUTO_VALUE }}
 
       - name: Configure AWS credentials # AWS 자격 설정
         uses: aws-actions/configure-aws-credentials@v2
