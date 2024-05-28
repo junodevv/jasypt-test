@@ -1,0 +1,28 @@
+# appspec.yml: codeDeploy가 참조하는 파일
+
+version: 0.0    # appspec.yml 파일 버전을 정의 현재 0.0만을 지원한다고 한다(23년4월기준)
+os: linux       # 배포가 이루어질 운영체제
+
+# 파일배포 관련 설정
+files:
+  - source: /                                 # 소스파일의 루트 directory
+    destination: /home/ec2-user/jasypt-test   # 소스파일이 배포될 대상 디렉토리 지정
+    overwrite: yes                            # 기존파일이 있을 경우 덮어쓸지 여부
+file_exists_behavior: OVERWRITE               # 파일이 이미 존재할떄의 동작정의, OVERWRITE==덮어쓰기
+
+# 권한 설정
+permissions:
+  - object: /         # 권할을 설정할 객체의 푸트 지정?
+    pattern: "**"     # 모든 파일과 디렉터리에 대해 패턴 지정?
+    owner: ec2-user   # 파일 및 디렉터리의 소유자를 지정(ec2-user)
+
+# 훅 : 특정 이벤트가 발생할때 실행할
+hooks:
+  AfterInstall:                   # 어플리케이션 설치 이후 작업정의
+    - location: scripts/stop.sh   # scripts 파일 내부의 stop.sh(명령어 스크립트)를 실행 -> 실행중인 어플리케이션을 종료시킨다
+      timeout: 300                # 스크립트 실행 최대시간 300초
+      runas: ec2-user             # 권한 ec2-user로 실행
+  ApplicationStart:                 # 어플리케이션 시작할떄 실행할 작업 정의
+    - location: scripts/start.sh    # scripts 파일 내부의 start.sh(명령어 스크립트)를 실행 -> 새로 어플리케이션을 실행시킨다.
+      timeout: 300
+      runas: ec2-user
