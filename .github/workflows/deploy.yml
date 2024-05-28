@@ -12,10 +12,9 @@ env:
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: jasypt-deploy-test
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      # 빌드
       - name: Checkout
         uses: actions/checkout@v4 # 저장소로 부터 코드를 내려받는 액션
       
@@ -33,9 +32,9 @@ jobs:
               -Pjasypt.encryptor.password=${{ secrets.JASYPT_PASSWORD_KEY }} \
               -PdatabaseUrl=${{ secrets.DATABASE_URL }} \
               -PddlAutoValue=${{ vars.DDL_AUTO_VALUE }}
-      # 배포
+
       - name: Configure AWS credentials # AWS 자격 설정
-        uses: aws-actions/configure-aws-credential@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
