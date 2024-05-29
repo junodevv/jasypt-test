@@ -18,4 +18,3 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-    password: ${JASYPT_PASSWORD_KEY}
