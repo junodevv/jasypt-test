@@ -30,7 +30,7 @@ jobs:
       - name: Build with Gradle     # 내려 받은 코드 빌드
         run: |
           ./gradlew clean build \
-            -Pjasypt.encryptor.password=${{ secrets.JASYPT_PASSWORD_KEY }} \
+            -Pjasypt.encryptor.key=${{ secrets.JASYPT_PASSWORD_KEY }} \
             -PdatabaseUrl=${{ secrets.DATABASE_URL }} \
             -PddlAutoValue=${{ vars.DDL_AUTO_VALUE }}
 
