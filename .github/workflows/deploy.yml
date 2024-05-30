@@ -11,7 +11,7 @@ env:
   CODE_DEPLOY_APPLICATION_NAME: jasypt-test
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: jasypt-deploy-test
   # 코드 관련
-  ENVIRONMENT_VARIABLE_FILE_PATH: ./src/main/resource/env.yml
+  ENVIRONMENT_VARIABLE_FILE_PATH: ./src/main/resources/env.yml
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
