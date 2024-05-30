@@ -26,8 +26,8 @@ jobs:
 
       - name: Generate Environment Variable File
         run: |
-          echo "JASYPT_PASSWORD_KEY:${{ secrets.JASYPT_PASSWORD_KEY }}" >> ${{ ENVIRONMENT_VARIABLE_FILE_PATH }}
-          echo "DATABASE_URL:${{ secrets.DATABASE_URL }}" >> ${{ ENVIRONMENT_VARIABLE_FILE_PATH }}
+          echo "JASYPT_PASSWORD_KEY:${{ secrets.JASYPT_PASSWORD_KEY }}" >> ${{ env.ENVIRONMENT_VARIABLE_FILE_PATH }}
+          echo "DATABASE_URL:${{ secrets.DATABASE_URL }}" >> ${{ env.ENVIRONMENT_VARIABLE_FILE_PATH }}
 
       - name: Grant execute permission for gradlew 
         run: chmod +x ./gradlew # gradlew 명령어 권한 부여
