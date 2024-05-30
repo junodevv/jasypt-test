@@ -10,7 +10,8 @@ env:
   S3_BUCKET_NAME: juno-code-deploy-bucket
   CODE_DEPLOY_APPLICATION_NAME: jasypt-test
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: jasypt-deploy-test
-
+  # 코드 관련
+  ENVIRONMENT_VARIABLE_FILE_PATH: ./src/main/resource/env.yml
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -23,16 +24,17 @@ jobs:
           distribution: 'temurin' 
           java-version: '17'
 
+      - name: Generate Environment Variable File
+        run: |
+          echo "JASYPT_PASSWORD_KEY:${{ secrets.JASYPT_PASSWORD_KEY }}" >> ${{ ENVIRONMENT_VARIABLE_FILE_PATH }}
+          echo "DATABASE_URL:${{ secrets.DATABASE_URL }}" >> ${{ ENVIRONMENT_VARIABLE_FILE_PATH }}
+
       - name: Grant execute permission for gradlew 
         run: chmod +x ./gradlew # gradlew 명령어 권한 부여
         shell: bash
 
       - name: Build with Gradle     # 내려 받은 코드 빌드
-        run: |
-          ./gradlew clean build \
-            -Djasypt.encryptor.key=${{ secrets.JASYPT_PASSWORD_KEY }} \
-            -DDATABASE_URL=${{ secrets.DATABASE_URL }} \
-            -DDDL_AUTO_VALUE=${{ vars.DDL_AUTO_VALUE }}
+        run: ./gradlew clean build
 
       - name: Configure AWS credentials # AWS 자격 설정
         uses: aws-actions/configure-aws-credentials@v2
