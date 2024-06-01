@@ -10,7 +10,7 @@ DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
 TIME_NOW=$(date + %c)
 
 # 현재 구동중인 애플리케이션의 PID 를 확인
-CURRENT_PID=${pgrep -f $JAR_FILE}
+CURRENT_PID=$(pgrep -f $JAR_FILE)
 
 # 프로세스가 켜져있으면 종료시켜주기
 if [ -z $CURRENT_PID ]; then # PID 가 없다면

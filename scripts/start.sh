@@ -22,5 +22,5 @@ nohup java -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
 #↳ & : 명령어를 백그라운드에서 실행한다.
 
 # 결과 출력
-CURRENT_PID=${pgrep -f $JAR_FILE}
+CURRENT_PID=$(pgrep -f $JAR_FILE)
 echo "$TIME_NOW > 실행 완료. PID = $CURRENT_PID " >> $DEPLOY_LOG # 어플리케이션이 새로 실행 될 때마다 PID 가 바뀌는데 이를 확인하기위한 로그
